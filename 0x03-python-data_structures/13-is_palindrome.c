@@ -1,24 +1,6 @@
 #include "lists.h"
 
 /**
- * checkPal - check for palindrome recursively
- *
- * @left: head node
- * @right: ref node
- * Return: 0 or 1
- */
-int checkPal(listint_t **left, listint_t *right)
-{
-	if (right == NULL)
-	{
-		return (1);
-	}
-	int result = checkPal(left, right->next) && ((*left)->n == right->n);
-	(*left) = (*left)->next;
-	return (result);
-}
-
-/**
  * is_palindrome - check id a linked list
  * is a palindrome
  *
@@ -27,5 +9,42 @@ int checkPal(listint_t **left, listint_t *right)
  */
 int is_palindrome(listint_t **head)
 {
-	return (checkPal(head, *head));
+	if (*head == NULL || (*head)->next == NULL)
+	{
+		return (1);
+	}
+	listint_t *head1 = *head;
+	listint_t *head2 = (*head)->next;
+	int count = 1;
+
+	while (head1->next != NULL)
+	{
+		head1 = head1->next;
+		count++;
+	}
+	head1 = *head;
+	(*head)->next = NULL;
+
+	for (int i = 1; i < count / 2; i++)
+	{
+		listint_t *r = head2->next;
+
+		head2->next = head1;
+		head1 = head2;
+		head2 = r;
+	}
+	if (count % 2 != 0)
+	{
+		head2 = head2->next;
+	}
+	while (head1 != NULL)
+	{
+		if (head1->n != head2->n)
+		{
+			return (0);
+		}
+		head1 = head1->next;
+		head2 = head2->next;
+	}
+	return (1);
 }
