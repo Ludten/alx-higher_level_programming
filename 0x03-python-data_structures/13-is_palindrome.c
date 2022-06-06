@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "lists.h"
 
 /**
@@ -11,14 +9,13 @@
  */
 int is_palindrome(listint_t **head)
 {
-	if (*head == NULL || (*head)->next == NULL)
-	{
-		return (1);
-	}
-	listint_t *head1 = *head;
-	listint_t *head2 = (*head)->next;
-	int count = 1;
+	listint_t *head1, *head2, *r;
+	int i, count = 1;
 
+	if (*head == NULL || (*head)->next == NULL)
+		return (1);
+	head1 = *head;
+	head2 = (*head)->next;
 	while (head1->next != NULL)
 	{
 		head1 = head1->next;
@@ -27,9 +24,9 @@ int is_palindrome(listint_t **head)
 	head1 = *head;
 	(*head)->next = NULL;
 
-	for (int i = 1; i < count / 2; i++)
+	for (i = 1; i < count / 2; i++)
 	{
-		listint_t *r = head2->next;
+		r = head2->next;
 
 		head2->next = head1;
 		head1 = head2;
