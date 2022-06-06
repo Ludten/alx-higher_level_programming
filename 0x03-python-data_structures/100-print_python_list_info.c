@@ -3,9 +3,9 @@
 #include "object.h"
 
 /**
- * print_python_list_info - Print info about 
+ * print_python_list_info - Print info about
  * Python lists
- * 
+ *
  * @p: List struct
  */
 void print_python_list_info(PyObject *p)
