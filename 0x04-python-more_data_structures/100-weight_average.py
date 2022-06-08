@@ -1,7 +1,4 @@
 #!/usr/bin/python3
-from functools import reduce
-
-
 def weight_average(my_list=[]):
     if my_list:
         s = 0
