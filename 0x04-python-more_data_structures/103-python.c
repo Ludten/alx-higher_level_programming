@@ -34,6 +34,8 @@ void print_python_list(PyObject *p)
 				item = input->ob_item[i];
 				typ = item->ob_type;
 				printf("Element %zu: %s\n", i, typ->tp_name);
+				if (strcmp(typ->tp_name, "bytes") == 0)
+					print_python_bytes(input->ob_item[i]);
 			}
 		}
 	}
