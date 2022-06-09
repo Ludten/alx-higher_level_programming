@@ -1,6 +1,9 @@
 #include "Python.h"
 #include <string.h>
 
+void print_python_list(PyObject *p);
+void print_python_bytes(PyObject *p);
+
 /**
  * print_python_list - Print info about
  * Python lists
@@ -9,21 +12,24 @@
  */
 void print_python_list(PyObject *p)
 {
-	Py_ssize_t i;
+	Py_ssize_t i, size;
 	PyObject *item;
 	PyListObject *input;
 	PyTypeObject *typ;
+	PyVarObject *var;
 
 	if (PyList_Check(p))
 	{
 		input = (PyListObject *)(p);
+		var = (PyVarObject *)(p);
+		size = var->ob_size;
 		printf("[*] Python list info\n");
-		printf("[*] Size of the Python List = %zu\n", PyList_Size(p));
+		printf("[*] Size of the Python List = %zu\n", size);
 		printf("[*] Allocated = %zu\n", input->allocated);
 
 		if (PyList_Size(p) > 0)
 		{
-			for (i = 0; i < PyList_Size(p); i++)
+			for (i = 0; i < size; i++)
 			{
 				item = input->ob_item[i];
 				typ = item->ob_type;
@@ -51,8 +57,8 @@ void print_python_bytes(PyObject *p)
 	{
 		var = (PyVarObject *)(p);
 		i = var->ob_size;
-		str = PyBytes_AsString(p);
 		byt = (PyBytesObject *)(p);
+		str = byt->ob_sval;
 		printf("  size: %zu\n", i);
 		printf("  trying string: %s\n", str);
 		if (i > 9)
