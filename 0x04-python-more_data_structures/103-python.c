@@ -45,6 +45,7 @@ void print_python_bytes(PyObject *p)
 	PyVarObject *var;
 	char *str;
 	PyBytesObject *byt;
+
 	printf("[.] bytes object info\n");
 	if (PyBytes_Check(p))
 	{
