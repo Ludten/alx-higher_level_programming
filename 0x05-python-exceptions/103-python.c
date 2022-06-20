@@ -20,12 +20,12 @@ void print_python_list(PyObject *p)
 	PyTypeObject *typ;
 	PyVarObject *var;
 
+	dprintf(1, "[*] Python list info\n");
 	if (PyList_Check(p))
 	{
 		input = (PyListObject *)(p);
 		var = (PyVarObject *)(p);
 		size = var->ob_size;
-		dprintf(1, "[*] Python list info\n");
 		dprintf(1, "[*] Size of the Python List = %zu\n", size);
 		dprintf(1, "[*] Allocated = %zu\n", input->allocated);
 
