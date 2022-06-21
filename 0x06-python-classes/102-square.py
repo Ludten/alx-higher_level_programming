@@ -16,7 +16,7 @@ class Square:
     """
 
     def __init__(self, size=0):
-        self.__size = size
+        self.size = size
 
     @property
     def size(self):
@@ -56,7 +56,7 @@ class Square:
         """
         if not isinstance(other, Square):
             return NotImplemented
-        return self.__size == other.__size
+        return self.size == other.size
 
     def __ne__(self, other):
         """
@@ -64,7 +64,7 @@ class Square:
         """
         if not isinstance(other, Square):
             return NotImplemented
-        return self.__size != other.__size
+        return self.size != other.size
 
     def __lt__(self, other):
         """
@@ -72,7 +72,7 @@ class Square:
         """
         if not isinstance(other, Square):
             return NotImplemented
-        return self.__size < other.__size
+        return self.size < other.size
 
     def __le__(self, other):
         """
@@ -80,7 +80,7 @@ class Square:
         """
         if not isinstance(other, Square):
             return NotImplemented
-        return self.__size <= other.__size
+        return self.size <= other.size
 
     def __gt__(self, other):
         """
@@ -88,7 +88,7 @@ class Square:
         """
         if not isinstance(other, Square):
             return NotImplemented
-        return self.__size > other.__size
+        return self.size > other.size
 
     def __ge__(self, other):
         """
@@ -96,21 +96,4 @@ class Square:
         """
         if not isinstance(other, Square):
             return NotImplemented
-        return self.__size >= other.__size
-
-
-s_5 = Square(5)
-s_6 = Square(6)
-
-if s_5 < s_6:
-    print("Square 5 < Square 6")
-if s_5 <= s_6:
-    print("Square 5 <= Square 6")
-if s_5 == s_6:
-    print("Square 5 == Square 6")
-if s_5 != s_6:
-    print("Square 5 != Square 6")
-if s_5 > s_6:
-    print("Square 5 > Square 6")
-if s_5 >= s_6:
-    print("Square 5 >= Square 6")
+        return self.size >= other.size
