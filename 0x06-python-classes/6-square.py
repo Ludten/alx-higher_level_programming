@@ -50,7 +50,7 @@ class Square:
         Get and set position of square
 
         Args:
-        position (tuple): displacement of sqaure
+        value (tuple): displacement of sqaure
 
         Raises:
             TypeError: if an integer in tuple is not positive
@@ -78,6 +78,10 @@ class Square:
         Prints the square
         """
         if self.__size == 0:
+            if self.__position[1] > 0:
+                for i in range(self.__position[1]):
+                    print('')
+            print(' ' * self.__position[0], end='')
             print('')
         else:
             if self.__position[1] > 0:
