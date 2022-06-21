@@ -80,7 +80,7 @@ class SinglyLinkedList:
         Args:
             head (obj): points to the head node
         """
-        self.head = None
+        self.__head = None
 
     def sorted_insert(self, value):
         """
