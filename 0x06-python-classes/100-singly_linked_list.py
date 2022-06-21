@@ -21,8 +21,8 @@ class Node:
         data (int): data to be added to node
         next_node (obj): points to the next node
         """
-        self.__data = data
-        self.__next_node = next_node
+        self.data = data
+        self.next_node = next_node
 
     @property
     def data(self):
@@ -80,7 +80,7 @@ class SinglyLinkedList:
         Args:
             head (obj): points to the head node
         """
-        self.__head = None
+        self.head = None
 
     def sorted_insert(self, value):
         """
