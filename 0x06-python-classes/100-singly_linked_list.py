@@ -3,9 +3,6 @@
 A Singly Linked List module
 """
 
-from traceback import print_list
-from requests import head
-
 
 class Node:
     """
