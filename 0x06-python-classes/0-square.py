@@ -3,4 +3,3 @@ class Square:
     """
     An empty class used to represent A square
     """
-    pass
