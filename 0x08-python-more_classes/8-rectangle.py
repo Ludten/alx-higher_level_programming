@@ -191,5 +191,5 @@ class Rectangle:
 
         if rect_1 >= rect_2:
             return rect_1
-        else:
+        elif rect_1 < rect_2:
             return rect_2
