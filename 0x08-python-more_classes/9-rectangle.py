@@ -121,54 +121,7 @@ class Rectangle:
         type(self).number_of_instances -= 1
         print("Bye rectangle...")
 
-    def __eq__(self, other):
-        """
-        check class equality
-        """
-        if not isinstance(other, Rectangle):
-            return NotImplemented
-        return (self.width * self.height) == (other.width * other.height)
-
-    def __ne__(self, other):
-        """
-        check class equality
-        """
-        if not isinstance(other, Rectangle):
-            return NotImplemented
-        return (self.width * self.height) != (other.width * other.height)
-
-    def __lt__(self, other):
-        """
-        compare classes
-        """
-        if not isinstance(other, Rectangle):
-            return NotImplemented
-        return (self.width * self.height) < (other.width * other.height)
-
-    def __le__(self, other):
-        """
-        compare classes
-        """
-        if not isinstance(other, Rectangle):
-            return NotImplemented
-        return (self.width * self.height) <= (other.width * other.height)
-
-    def __gt__(self, other):
-        """
-        compare classes
-        """
-        if not isinstance(other, Rectangle):
-            return NotImplemented
-        return (self.width * self.height) > (other.width * other.height)
-
-    def __ge__(self, other):
-        """
-        compare classes
-        """
-        if not isinstance(other, Rectangle):
-            return NotImplemented
-        return (self.width * self.height) >= (other.width * other.height)
-
+    @staticmethod
     def bigger_or_equal(rect_1, rect_2):
         """
         compare two rectangle class instances
@@ -189,7 +142,7 @@ class Rectangle:
         if type(rect_2) is not Rectangle:
             raise TypeError("rect_2 must be an instance of Rectangle")
 
-        if rect_1 >= rect_2:
+        if rect_1.area() >= rect_2.area():
             return rect_1
         else:
             return rect_2
