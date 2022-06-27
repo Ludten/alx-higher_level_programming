@@ -110,9 +110,7 @@ class Rectangle:
         """
         return class instance representation
         """
-        reprec = "Rectangle" + \
-            "(" + str(self.width) + "," + str(self.height) + ")"
-        return reprec
+        return 'Rectangle({:d}, {:d})'.format(self.width, self.height)
 
     def __del__(self):
         """
@@ -169,6 +167,7 @@ class Rectangle:
             return NotImplemented
         return (self.width * self.height) >= (other.width * other.height)
 
+    @staticmethod
     def bigger_or_equal(rect_1, rect_2):
         """
         compare two rectangle class instances

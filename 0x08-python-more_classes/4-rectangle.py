@@ -109,9 +109,7 @@ class Rectangle:
         """
         return class representation
         """
-        reprec = str(self.__class__) + \
-            "(" + str(self.width) + "," + str(self.height) + ")"
-        return reprec
+        return 'Rectangle({:d}, {:d})'.format(self.width, self.height)
 
 
 my_rectangle = Rectangle(2, 4)
