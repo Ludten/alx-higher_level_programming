@@ -15,11 +15,16 @@ class Rectangle:
     Attributes:
         width (int): where the width is being stored
         height (int): where the height is being stored
+        number_of_instances (int): number of instances
+        print_symbol (string): rectangle symbol to print
     """
+    number_of_instances = 0
+    print_symbol = '#'
 
     def __init__(self, width=0, height=0):
         self.width = width
         self.height = height
+        type(self).number_of_instances += 1
 
     @property
     def width(self):
@@ -86,3 +91,32 @@ class Rectangle:
         if (self.__height == 0 or self.__width == 0):
             return 0
         return (2 * (self.__width + self.__height))
+
+    def __str__(self):
+        """
+        return class
+        """
+        rec = ""
+        if (self.__height == 0 or self.__width == 0):
+            return rec
+        else:
+            for j in range(self.__height):
+                for x in range(self.__width):
+                    rec += str(self.print_symbol)
+                rec += '\n'
+            return rec[:-1]
+
+    def __repr__(self):
+        """
+        return class instance representation
+        """
+        reprec = "Rectangle" + \
+            "(" + str(self.width) + "," + str(self.height) + ")"
+        return reprec
+
+    def __del__(self):
+        """
+        delete class instance representation
+        """
+        type(self).number_of_instances -= 1
+        print("Bye rectangle...")

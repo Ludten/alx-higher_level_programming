@@ -15,11 +15,16 @@ class Rectangle:
     Attributes:
         width (int): where the width is being stored
         height (int): where the height is being stored
+        number_of_instances (int): number of instances
+        print_symbol (string): rectangle symbol to print
     """
+    number_of_instances = 0
+    print_symbol = '#'
 
     def __init__(self, width=0, height=0):
         self.width = width
         self.height = height
+        type(self).number_of_instances += 1
 
     @property
     def width(self):
@@ -97,7 +102,7 @@ class Rectangle:
         else:
             for j in range(self.__height):
                 for x in range(self.__width):
-                    rec += '#'
+                    rec += str(self.print_symbol)
                 rec += '\n'
             return rec[:-1]
 
@@ -113,4 +118,78 @@ class Rectangle:
         """
         delete class instance representation
         """
+        type(self).number_of_instances -= 1
         print("Bye rectangle...")
+
+    def __eq__(self, other):
+        """
+        check class equality
+        """
+        if not isinstance(other, Rectangle):
+            return NotImplemented
+        return (self.width * self.height) == (other.width * other.height)
+
+    def __ne__(self, other):
+        """
+        check class equality
+        """
+        if not isinstance(other, Rectangle):
+            return NotImplemented
+        return (self.width * self.height) != (other.width * other.height)
+
+    def __lt__(self, other):
+        """
+        compare classes
+        """
+        if not isinstance(other, Rectangle):
+            return NotImplemented
+        return (self.width * self.height) < (other.width * other.height)
+
+    def __le__(self, other):
+        """
+        compare classes
+        """
+        if not isinstance(other, Rectangle):
+            return NotImplemented
+        return (self.width * self.height) <= (other.width * other.height)
+
+    def __gt__(self, other):
+        """
+        compare classes
+        """
+        if not isinstance(other, Rectangle):
+            return NotImplemented
+        return (self.width * self.height) > (other.width * other.height)
+
+    def __ge__(self, other):
+        """
+        compare classes
+        """
+        if not isinstance(other, Rectangle):
+            return NotImplemented
+        return (self.width * self.height) >= (other.width * other.height)
+
+    def bigger_or_equal(rect_1, rect_2):
+        """
+        compare two rectangle class instances
+
+        Args:
+            rect_1: first rectangle
+            rect_2: second rectangle
+
+        Raises:
+            TypeError: if rect_1 or rect_2 is of
+            the Rectangle class instance
+
+        Return:
+            rect_1 or rect_2
+        """
+        if type(rect_1) is not Rectangle:
+            raise TypeError("rect_1 must be an instance of Rectangle")
+        if type(rect_2) is not Rectangle:
+            raise TypeError("rect_2 must be an instance of Rectangle")
+
+        if rect_1 >= rect_2:
+            return rect_1
+        else:
+            return rect_2

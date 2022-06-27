@@ -10,11 +10,11 @@ class Rectangle:
 
     Args:
         width (int): width of rectangle
-            height (int): height of rectangle
+        height (int): height of rectangle
 
     Attributes:
-            width (int): where the width is being stored
-            height (int): where the height is being stored
+        width (int): where the width is being stored
+        height (int): where the height is being stored
     """
 
     def __init__(self, width=0, height=0):
