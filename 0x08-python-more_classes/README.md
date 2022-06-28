@@ -1,5 +1,5 @@
 # Python - More Classes and Objects
-> Each file in this repository holds code that illustrates More Classes and Objects
+> Each file in this repository holds code that illustrates Classes and Objects
 > specific to the Python programming language
 
 ## Description of what each file shows:
