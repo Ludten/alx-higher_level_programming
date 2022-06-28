@@ -1,8 +1,4 @@
 #!/usr/bin/python3
 def magic_string():
-    bsch = []
-    return bsch.append("BestSchool")
-
-
-for i in range(10):
-    print(magic_string())
+    magic_string.calls = getattr(magic_string, 'calls', 0) + 1
+    return ("BestSchool, " * (magic_string.calls - 1) + "BestSchool")
