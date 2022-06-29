@@ -27,6 +27,11 @@ Lists
     >>> matrix_divided(a, b)
     [[1.0], [1.25], [1.5]]
 
+    >>> a = [[4], [5], [6]]
+    >>> b = float('inf')
+    >>> matrix_divided(a, b)
+    [[0.0], [0.0], [0.0]]
+
 Non-Lists
 =========
 
@@ -116,3 +121,14 @@ numbers can only be divided by nonzero
     Traceback (most recent call last):
       ...
     ZeroDivisionError: division by zero
+
+    >>> a = [[7, 8, 9], [9, 10, 11]]
+    >>> matrix_divided(a)
+    Traceback (most recent call last):
+      ...
+    TypeError: matrix_divided() missing 1 required positional argument: 'div'
+
+    >>> matrix_divided()
+    Traceback (most recent call last):
+      ...
+    TypeError: matrix_divided() missing 2 required positional arguments: 'matrix' and 'div'

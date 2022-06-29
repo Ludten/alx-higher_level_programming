@@ -5,9 +5,6 @@ an integer
 """
 
 
-from numpy import mat
-
-
 def matrix_divided(matrix, div):
     """
     Divide a matrix with an integer
@@ -48,9 +45,5 @@ integers/floats")
     if div == 0:
         raise ZeroDivisionError("division by zero")
 
-    new_mat = matrix[:]
-
-    for i in range(len(new_mat)):
-        for j in range(len(new_mat[0])):
-            new_mat[i][j] = round(new_mat[i][j]/div, 2)
+    new_mat = [[round(j / div, 2) for j in i] for i in matrix]
     return new_mat
