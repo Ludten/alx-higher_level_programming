@@ -8,11 +8,14 @@ integers
 def add_integer(a, b=98):
     """
     Add two integers
+
     Args:
         a (int)
         b (int)
+
     Raises:
         TypeError: if a or b is not an integer or float
+
     Returns:
         sum of integers
     """

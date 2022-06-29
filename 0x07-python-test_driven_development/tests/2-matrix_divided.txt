@@ -1,0 +1,99 @@
+===============================
+ How to Use 2-matrix_divided.py
+===============================
+
+This library show usage of ``matrix_divided()``.
+
+Lists
+=====
+
+``matrix_divided()`` returns the product of its arguments.
+
+::
+
+    >>> matrix_divided = __import__('2-matrix_divided').matrix_divided
+    >>> a = [[1, 2, 3], [4, 5, 6]]
+    >>> b = 2
+    >>> matrix_divided(a, b)
+    [[0.5, 1.0, 1.5], [2.0, 2.5, 3.0]]
+
+    >>> a = [[4], [5], [6]]
+    >>> b = 4
+    >>> matrix_divided(a, b)
+    [[1.0], [1.25], [1.5]]
+
+Non-Lists
+=========
+
+``matrix_divided()`` is only designed to accept list
+of lists, if one of the arguments is an integer, a
+string, a list of any other data type or a tuple,
+it should raise a TypeError
+
+::
+
+    >>> a = [1, (1, 2, 3)]
+    >>> b = 3
+    >>> matrix_divided(a, b)
+    Traceback (most recent call last):
+      ...
+    TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+    >>> a = [3, 4, 2]
+    >>> b = 3
+    >>> matrix_divided(a, b)
+    Traceback (most recent call last):
+      ...
+    TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+
+``matrix_divided()`` is only designed to accept list
+of lists with only integer values, if one of the
+values is not an integer or float, it should raise a
+TypeError
+
+::
+
+    >>> a = [[7, 'ag'], [9, 10]]
+    >>> b = 2
+    >>> matrix_divided(a, b)
+    Traceback (most recent call last):
+      ...
+    TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+``matrix_divided()`` is only designed to accept lists
+and list of lists with equal rows, if one of the
+row is a different length, it should raise a TypeError
+
+::
+
+    >>> a = [[7, 8], [9, 10, 11]]
+    >>> b = 1
+    >>> matrix_divided(a, b)
+    Traceback (most recent call last):
+      ...
+    TypeError: Each row of the matrix must have the same size
+
+``matrix_divided()`` is only designed to divide with numbers
+if the divsor is not an integer or a float, it should raise
+a TypeError
+
+::
+
+    >>> a = [[7, 8, 9], [9, 10, 11]]
+    >>> b = 'gg'
+    >>> matrix_divided(a, b)
+    Traceback (most recent call last):
+      ...
+    TypeError: div must be a number
+
+numbers can only be divided by nonzero
+
+::
+
+    >>> a = [[7, 8, 9], [9, 10, 11]]
+    >>> b = 0
+    >>> matrix_divided(a, b)
+    Traceback (most recent call last):
+      ...
+    ZeroDivisionError: division by zero

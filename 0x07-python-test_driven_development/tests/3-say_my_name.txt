@@ -1,0 +1,48 @@
+=================================
+ How to Use 3-say_my_name.py
+=================================
+
+This library show usage of ``say_my_name()``.
+
+String
+======
+
+``say_my_name()`` prints a text with both arguments
+passed
+
+::
+
+    >>> say_my_name = __import__('3-say_my_name').say_my_name
+    >>> a = 'Quonam'
+    >>> b = 'Modo'
+    >>> say_my_name(a, b)
+    My name is Quonam Modo
+
+It also accepts singly passed variables.
+
+::
+
+    >>> text = 'a'
+    >>> say_my_name(text)
+    My name is a 
+
+Non-String
+==========
+
+``say_my_name()`` is only designed to accept string,
+if the argument is a integer, a list, or a tuple, it
+should raise a TypeError
+
+::
+
+    >>> text = [1, 2]
+    >>> say_my_name(text)
+    Traceback (most recent call last):
+      ...
+    TypeError: first_name must be a string
+
+    >>> text = 297
+    >>> say_my_name(text)
+    Traceback (most recent call last):
+      ...
+    TypeError: first_name must be a string

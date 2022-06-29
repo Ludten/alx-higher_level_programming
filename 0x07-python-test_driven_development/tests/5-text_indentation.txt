@@ -1,0 +1,65 @@
+=================================
+ How to Use 5-text_indentation.py
+=================================
+
+This library show usage of ``text_indentation()``.
+
+String
+======
+
+``text_indentation()`` prints a text with 2 new lines
+after each of these characters: `.`, `?` and `:`
+
+::
+
+    >>> text_indentation = __import__('5-text_indentation').text_indentation
+    >>> text = 'consectetur adipiscing elit. Quonam modo? Non autem hoc: igitur ne'
+    >>> text_indentation(text)
+    consectetur adipiscing elit.
+    <BLANKLINE>
+    Quonam modo?
+    <BLANKLINE>
+    Non autem hoc:
+    <BLANKLINE>
+    igitur ne
+
+    >>> text = 'a'
+    >>> text_indentation(text)
+    a
+
+    >>> text = 'Put.BLANKLINE:in the expected?output just like'
+    >>> text_indentation(text)
+    Put.
+    <BLANKLINE>
+    BLANKLINE:
+    <BLANKLINE>
+    in the expected?
+    <BLANKLINE>
+    output just like
+
+
+Non-String
+==========
+
+``text_indentation()`` is only designed to accept string,
+if the argument is a integer, a list, or a tuple, it
+should raise a TypeError
+
+::
+
+    >>> text = [1, 2]
+    >>> text_indentation(text)
+    Traceback (most recent call last):
+      ...
+    TypeError: text must be a string
+
+    >>> text = 297
+    >>> text_indentation(text)
+    Traceback (most recent call last):
+      ...
+    TypeError: text must be a string
+
+    >>> text_indentation()
+    Traceback (most recent call last):
+	...
+    TypeError: text_indentation() missing 1 required positional argument: 'text'

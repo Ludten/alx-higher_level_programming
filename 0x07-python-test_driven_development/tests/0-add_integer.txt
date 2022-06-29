@@ -35,10 +35,10 @@ It also works with floating-point values.
     5
 
     >>> add_integer(2.5, 3.7)
-    6
+    5
 
     >>> add_integer(3.7)
-    102
+    101
 
     >>> add_integer(4.5)
     102
@@ -67,3 +67,8 @@ Non-Numbers
     Traceback (most recent call last):
         ...
     TypeError: b must be an integer
+
+    >>> add_integer()
+    Traceback (most recent call last):
+	...
+    TypeError: add_integer() missing 1 required positional argument: 'a'

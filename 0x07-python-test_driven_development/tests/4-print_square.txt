@@ -1,0 +1,66 @@
+=================================
+ How to Use 4-print_square.py
+=================================
+
+This library show usage of ``print_square()``.
+
+Numbers
+=======
+
+``print_square()`` prints a square with the character `#`.
+
+::
+
+    >>> print_square = __import__('4-print_square').print_square
+    >>> print_square(4)
+    ####
+    ####
+    ####
+    ####
+
+    >>> print_square(1)
+    #
+
+    >>> print_square(0)
+    <BLANKLINE>
+
+Non-Numbers
+===========
+
+``print_square()`` is only designed to accept Numbers,
+if the argument is a string, a list, or a tuple, it
+should raise a TypeError
+
+::
+
+    >>> print_square('text')
+    Traceback (most recent call last):
+      ...
+    TypeError: size must be an integer
+
+    >>> text = (2, 3)
+    >>> print_square(text)
+    Traceback (most recent call last):
+      ...
+    TypeError: size must be an integer
+
+``print_square()`` is only designed to accept positive
+Numbers, if the argument is a negative, it should
+raise a ValueError
+
+::
+
+    >>> print_square(-4)
+    Traceback (most recent call last):
+      ...
+    ValueError: size must be >= 0
+
+    >>> print_square(-4.5)
+    Traceback (most recent call last):
+      ...
+    TypeError: size must be an integer
+
+    >>> print_square()
+    Traceback (most recent call last):
+	...
+    TypeError: print_square() missing 1 required positional argument: 'size'
