@@ -106,9 +106,9 @@ Non-Lists
     >>> lazy_matrix_mul(a)
     Traceback (most recent call last):
       ...
-    ValueError: shapes (2,3) and (2,3) not aligned: 3 (dim 1) != 2 (dim 0)
+    TypeError: lazy_matrix_mul() missing 1 required positional argument: 'm_b'
 
     >>> lazy_matrix_mul()
     Traceback (most recent call last):
       ...
-    ValueError: shapes (2,3) and (2,3) not aligned: 3 (dim 1) != 2 (dim 0)
+    TypeError: lazy_matrix_mul() missing 2 required positional arguments: 'm_a' and 'm_b'
