@@ -29,5 +29,7 @@ class TestMaxInteger(unittest.TestCase):
         check return
         """
         self.assertAlmostEqual(max_integer([1, 2, 45, 4]), 45)
+        self.assertAlmostEqual(max_integer([90, 2, 45, 4]), 90)
+        self.assertAlmostEqual(max_integer([1]), 1)
         self.assertAlmostEqual(max_integer((1, 2, 3)), 3)
         self.assertAlmostEqual(max_integer("string"), 't')
