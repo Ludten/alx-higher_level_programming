@@ -48,15 +48,9 @@ def matrix_mul(m_a, m_b):
     if any(len(lst) != lenb for lst in m_b):
         raise TypeError("each row of m_b must be of the same size")
 
-    if len(m_a) == len(m_b[0]):
+    if len(m_a[0]) == len(m_b):
         result = [[sum(a * b for a, b in zip(a_row, b_col))
                    for b_col in zip(*m_b)] for a_row in m_a]
-    elif len(m_a) == 1:
-        if len(m_a[0]) == len(m_b):
-            result = [[sum(a * b for a, b in zip(a_row, b_col))
-                       for b_col in zip(*m_b)] for a_row in m_a]
-        else:
-            raise ValueError("m_a and m_b can't be multiplied")
     else:
         raise ValueError("m_a and m_b can't be multiplied")
 

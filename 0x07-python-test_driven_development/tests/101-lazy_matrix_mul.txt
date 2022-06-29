@@ -101,3 +101,14 @@ Non-Lists
     Traceback (most recent call last):
       ...
     ValueError: shapes (2,3) and (2,3) not aligned: 3 (dim 1) != 2 (dim 0)
+
+    >>> a = [[7, 8, 9], [9, 10, 11]]
+    >>> lazy_matrix_mul(a)
+    Traceback (most recent call last):
+      ...
+    ValueError: shapes (2,3) and (2,3) not aligned: 3 (dim 1) != 2 (dim 0)
+
+    >>> lazy_matrix_mul()
+    Traceback (most recent call last):
+      ...
+    ValueError: shapes (2,3) and (2,3) not aligned: 3 (dim 1) != 2 (dim 0)

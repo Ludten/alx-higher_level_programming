@@ -49,12 +49,12 @@ or a tuple, it should raise a TypeError
       ...
     TypeError: m_a must be a list
 
-    >>> a = (1, 2, 3)
-    >>> b = [[7, 8], [9, 10], [11, 12]]
+    >>> a = [[7, 8], [9, 10], [11, 12]]
+    >>> b = (1, 2, 3)
     >>> matrix_mul(a, b)
     Traceback (most recent call last):
       ...
-    TypeError: m_a must be a list
+    TypeError: m_b must be a list
 
     >>> a = [1, (1, 2, 3)]
     >>> b = [[7, 8], [9, 10], [11, 12]]
@@ -62,6 +62,13 @@ or a tuple, it should raise a TypeError
     Traceback (most recent call last):
       ...
     TypeError: m_a must be a list of lists
+
+    >>> a = [[7, 8], [9, 10], [11, 12]]
+    >>> b = [1, (1, 2, 3)]
+    >>> matrix_mul(a, b)
+    Traceback (most recent call last):
+      ...
+    TypeError: m_b must be a list of lists
 
 
 ``matrix_mul()`` is only designed to accept non
@@ -98,6 +105,13 @@ should raise a TypeError
       ...
     TypeError: m_a should contain only integers or floats
 
+    >>> a = [[7, 8], [9, 10]]
+    >>> b = [[7, 'gg'], [9, 10]]
+    >>> matrix_mul(a, b)
+    Traceback (most recent call last):
+      ...
+    TypeError: m_b should contain only integers or floats
+
 ``matrix_mul()`` is only designed to accept lists
 and list of lists with equal rows, if one of the
 row is a different length, it should raise a TypeError
@@ -111,9 +125,35 @@ row is a different length, it should raise a TypeError
       ...
     TypeError: each row of m_a must be of the same size
 
+    >>> a = [[7, 8], [9, 10]]
+    >>> b = [[7, 8], [9, 10, 11]]
+    >>> matrix_mul(a, b)
+    Traceback (most recent call last):
+      ...
+    TypeError: each row of m_b must be of the same size
+
     >>> a = [[7, 8, 9], [9, 10, 11]]
     >>> b = [[7, 8, 9], [9, 10, 11]]
     >>> matrix_mul(a, b)
     Traceback (most recent call last):
       ...
     ValueError: m_a and m_b can't be multiplied
+
+    >>> a = [[1, 2, 3], [3, 4, 5]]
+    >>> b = [[1, 2], [3, 4]]
+    >>> matrix_mul(a, b)
+    Traceback (most recent call last):
+      ...
+    ValueError: m_a and m_b can't be multiplied
+
+    >>> a = [[7, 8, 9], [9, 10, 11]]
+    >>> matrix_mul(a)
+    Traceback (most recent call last):
+      ...
+    TypeError: matrix_mul() missing 1 required positional argument: 'm_b'
+
+    >>> matrix_mul()
+    Traceback (most recent call last):
+      ...
+    TypeError: matrix_mul() missing 2 required positional arguments: 'm_a' and 'm_b'
+
