@@ -5,9 +5,12 @@ an integer
 """
 
 
+from numpy import mat
+
+
 def matrix_divided(matrix, div):
     """
-    Add a matrix with an integer
+    Divide a matrix with an integer
 
     Args:
         matrix (list)
@@ -23,6 +26,9 @@ def matrix_divided(matrix, div):
         a new matrix divided
     """
     if isinstance(matrix, list) is not True:
+        raise TypeError(
+            "matrix must be a matrix (list of lists) of integers/floats")
+    if matrix == [] or matrix == [[]]:
         raise TypeError(
             "matrix must be a matrix (list of lists) of integers/floats")
     for el in matrix:

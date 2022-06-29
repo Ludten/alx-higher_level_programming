@@ -23,5 +23,5 @@ void print_python_string(PyObject *p)
 		printf("  value: %s\n", PyUnicode_AsUTF8(p));
 	}
 	else
-		printf("  [ERROR] Invalid List Object\n");
+		printf("  [ERROR] Invalid String Object\n");
 }
