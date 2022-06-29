@@ -20,6 +20,7 @@ def text_indentation(text):
     if isinstance(text, str) is not True:
         raise TypeError("text must be a string")
 
+    text = " ".join(text.split())
     ltext = list(text)
 
     for i in range(len(ltext)):

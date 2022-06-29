@@ -22,7 +22,7 @@ Numbers
     #
 
     >>> print_square(0)
-    <BLANKLINE>
+
 
 Non-Numbers
 ===========
