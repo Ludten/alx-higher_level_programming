@@ -91,7 +91,7 @@ Non-Lists
     >>> lazy_matrix_mul(a, b)
     Traceback (most recent call last):
       ...
-    TypeError: invalid data type for einsum
+    ValueError: Scalar operands are not allowed, use '*' instead
 
 ::
 
