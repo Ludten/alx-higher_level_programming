@@ -43,6 +43,16 @@ It also works with floating-point values.
     >>> add_integer(4.5)
     102
 
+    >>> add_integer(float('inf'))
+    Traceback (most recent call last):
+	...
+    OverflowError: cannot convert float infinity to integer
+
+    >>> add_integer(float('NaN'))
+    Traceback (most recent call last):
+	...
+    ValueError: cannot convert float NaN to integer
+
 
 Non-Numbers
 ===========
