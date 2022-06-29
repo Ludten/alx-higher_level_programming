@@ -45,7 +45,7 @@ Non-Lists
     >>> lazy_matrix_mul(a, b)
     Traceback (most recent call last):
       ...
-    ValueError: matmul: Input operand 0 does not have enough dimensions (has 0, gufunc core with signature (n?,k),(k,m?)->(n?,m?) requires 1)
+    ValueError: Scalar operands are not allowed, use '*' instead
 
     >>> a = (1, 2, 3)
     >>> b = [[7, 8], [9, 10], [11, 12]]
@@ -57,7 +57,7 @@ Non-Lists
     >>> lazy_matrix_mul(a, b)
     Traceback (most recent call last):
       ...
-    ValueError: matmul: Input operand 1 has a mismatch in its core dimension 0, with gufunc signature (n?,k),(k,m?)->(n?,m?) (size 3 is different from 2)
+    ValueError: setting an array element with a sequence.
 
 
 ::
@@ -67,14 +67,14 @@ Non-Lists
     >>> lazy_matrix_mul(a, b)
     Traceback (most recent call last):
       ...
-    ValueError: matmul: Input operand 1 has a mismatch in its core dimension 0, with gufunc signature (n?,k),(k,m?)->(n?,m?) (size 3 is different from 0)
+    ValueError: shapes (0,) and (3,2) not aligned: 0 (dim 0) != 3 (dim 0)
 
     >>> a = [[7, 8], [9, 10], [11, 12]]
     >>> b = [[]]
     >>> lazy_matrix_mul(a, b)
     Traceback (most recent call last):
       ...
-    ValueError: matmul: Input operand 1 has a mismatch in its core dimension 0, with gufunc signature (n?,k),(k,m?)->(n?,m?) (size 1 is different from 2)
+    ValueError: shapes (3,2) and (1,0) not aligned: 2 (dim 1) != 1 (dim 0)
 
 
 ::
@@ -84,7 +84,14 @@ Non-Lists
     >>> lazy_matrix_mul(a, b)
     Traceback (most recent call last):
       ...
-    numpy.core._exceptions._UFuncNoLoopError: ufunc 'matmul' did not contain a loop with signature matching types (dtype('<U21'), dtype('int64')) -> None
+    TypeError: invalid data type for einsum
+
+    >>> a = "words"
+    >>> b = [[7, 8], [9, 10]]
+    >>> lazy_matrix_mul(a, b)
+    Traceback (most recent call last):
+      ...
+    TypeError: invalid data type for einsum
 
 ::
 
@@ -93,4 +100,4 @@ Non-Lists
     >>> lazy_matrix_mul(a, b)
     Traceback (most recent call last):
       ...
-    ValueError: matmul: Input operand 1 has a mismatch in its core dimension 0, with gufunc signature (n?,k),(k,m?)->(n?,m?) (size 2 is different from 3)
+    ValueError: shapes (2,3) and (2,3) not aligned: 3 (dim 1) != 2 (dim 0)
