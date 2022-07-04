@@ -16,5 +16,5 @@ def lookup(obj):
     Returns:
         list
     """
-    obj_met = [dir(obj)]
+    obj_met = dir(obj)
     return obj_met
