@@ -46,3 +46,7 @@ Numbers
     Traceback (most recent call last):
       ...
     TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
+    >>> pol.size()
+    Traceback (most recent call last):
+      ...
+    AttributeError: 'BaseGeometry' object has no attribute 'size'
