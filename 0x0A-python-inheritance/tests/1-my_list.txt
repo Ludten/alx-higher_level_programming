@@ -13,123 +13,39 @@ Lists
 
     >>> MyList = __import__('1-my_list').MyList
     >>> new_list = MyList()
-    >>> a = [[1, 2, 3], [4, 5, 6]]
-    >>> b = 2
-    >>> MyList(a, b)
-    [[0.5, 1.0, 1.5], [2.0, 2.5, 3.0]]
-
-    >>> a = [[1, 2, 3]]
-    >>> b = 2
-    >>> MyList(a, b)
-    [[0.5, 1.0, 1.5]]
-
-    >>> a = [[4], [5], [6]]
-    >>> b = 4
-    >>> MyList(a, b)
-    [[1.0], [1.25], [1.5]]
-
-    >>> a = [[4], [5], [6]]
-    >>> b = float('inf')
-    >>> MyList(a, b)
-    [[0.0], [0.0], [0.0]]
-
-Non-Lists
-=========
-
-``MyList`` is only designed to accept list
-of lists, if one of the arguments is an integer, a
-string, a list of any other data type or a tuple,
-it should raise a TypeError
+    >>> new_list
+    []
+    >>> new_list.append(1)
+    >>> print(new_list)
+    [1]
+    >>> new_list.append(4)
+    >>> new_list.append(2)
+    >>> new_list.append(3)
+    >>> new_list.append(5)
+    >>> print(new_list)
+    [1, 4, 2, 3, 5]
+    >>> new_list.print_sorted()
+    [1, 2, 3, 4, 5]
+    >>> print(new_list)
+    [1, 4, 2, 3, 5]
 
 ::
 
-    >>> a = [1, (1, 2, 3)]
-    >>> b = 3
-    >>> MyList(a, b)
+    >>> new_list.clear()
+    >>> print(new_list)
+    []
+    >>> new_list += [1, 4]
+    >>> print(new_list)
+    [1, 4]
+    >>> new_list.pop()
+    4
+    >>> new_list.append(3)
+    >>> new_list.reverse()
+    >>> print(new_list)
+    [3, 1]
+
+    >>> new_list.append("gg")
+    >>> new_list.print_sorted()
     Traceback (most recent call last):
       ...
-    TypeError: matrix must be a matrix (list of lists) of integers/floats
-
-    >>> a = [3, 4, 2]
-    >>> b = 3
-    >>> MyList(a, b)
-    Traceback (most recent call last):
-      ...
-    TypeError: matrix must be a matrix (list of lists) of integers/floats
-
-    >>> a = []
-    >>> b = 3
-    >>> MyList(a, b)
-    Traceback (most recent call last):
-      ...
-    TypeError: matrix must be a matrix (list of lists) of integers/floats
-
-    >>> a = [[]]
-    >>> b = 3
-    >>> MyList(a, b)
-    Traceback (most recent call last):
-      ...
-    TypeError: matrix must be a matrix (list of lists) of integers/floats
-
-
-``MyList`` is only designed to accept list
-of lists with only integer values, if one of the
-values is not an integer or float, it should raise a
-TypeError
-
-::
-
-    >>> a = [[7, 'ag'], [9, 10]]
-    >>> b = 2
-    >>> MyList(a, b)
-    Traceback (most recent call last):
-      ...
-    TypeError: matrix must be a matrix (list of lists) of integers/floats
-
-``MyList`` is only designed to accept lists
-and list of lists with equal rows, if one of the
-row is a different length, it should raise a TypeError
-
-::
-
-    >>> a = [[7, 8], [9, 10, 11]]
-    >>> b = 1
-    >>> MyList(a, b)
-    Traceback (most recent call last):
-      ...
-    TypeError: Each row of the matrix must have the same size
-
-``MyList`` is only designed to divide with numbers
-if the divsor is not an integer or a float, it should raise
-a TypeError
-
-::
-
-    >>> a = [[7, 8, 9], [9, 10, 11]]
-    >>> b = 'gg'
-    >>> MyList(a, b)
-    Traceback (most recent call last):
-      ...
-    TypeError: div must be a number
-
-numbers can only be divided by nonzero
-
-::
-
-    >>> a = [[7, 8, 9], [9, 10, 11]]
-    >>> b = 0
-    >>> MyList(a, b)
-    Traceback (most recent call last):
-      ...
-    ZeroDivisionError: division by zero
-
-    >>> a = [[7, 8, 9], [9, 10, 11]]
-    >>> MyList(a)
-    Traceback (most recent call last):
-      ...
-    TypeError: MyList missing 1 required positional argument: 'div'
-
-    >>> MyList
-    Traceback (most recent call last):
-      ...
-    TypeError: MyList missing 2 required positional arguments: 'matrix' and 'div'
+    TypeError: '<' not supported between instances of 'str' and 'int'
