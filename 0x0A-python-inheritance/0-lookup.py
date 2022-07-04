@@ -16,6 +16,5 @@ def lookup(obj):
     Returns:
         list
     """
-    obj_met = [method_name for method_name in dir(
-        obj) if callable(getattr(obj, method_name))]
+    obj_met = [dir(obj)]
     return obj_met
