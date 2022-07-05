@@ -40,42 +40,41 @@ if __name__ == "__main__":
                 elif stat_code == 500:
                     sc50 += 1
                 if (ln % 10 == 0):
-                    sys.stdout.flush()
                     print("File size: {:d}". format(file_size))
-                    if sc20 > 1:
+                    if sc20 > 0:
                         print("200: {:d}".format(sc20))
-                    if sc31 > 1:
+                    if sc31 > 0:
                         print("301: {:d}".format(sc31))
-                    if sc40 > 1:
+                    if sc40 > 0:
                         print("400: {:d}".format(sc40))
-                    if sc41 > 1:
+                    if sc41 > 0:
                         print("401: {:d}".format(sc41))
-                    if sc43 > 1:
+                    if sc43 > 0:
                         print("403: {:d}".format(sc43))
-                    if sc44 > 1:
+                    if sc44 > 0:
                         print("404: {:d}".format(sc44))
-                    if sc45 > 1:
+                    if sc45 > 0:
                         print("405: {:d}".format(sc45))
-                    if sc50 > 1:
+                    if sc50 > 0:
                         print("500: {:d}".format(sc50))
             except KeyboardInterrupt:
                 pass
 
     except KeyboardInterrupt:
         print("File size: {:d}". format(file_size))
-        if sc20 > 1:
+        if sc20 > 0:
             print("200: {:d}".format(sc20))
-        if sc31 > 1:
+        if sc31 > 0:
             print("301: {:d}".format(sc31))
-        if sc40 > 1:
+        if sc40 > 0:
             print("400: {:d}".format(sc40))
-        if sc41 > 1:
+        if sc41 > 0:
             print("401: {:d}".format(sc41))
-        if sc43 > 1:
+        if sc43 > 0:
             print("403: {:d}".format(sc43))
-        if sc44 > 1:
+        if sc44 > 0:
             print("404: {:d}".format(sc44))
-        if sc45 > 1:
+        if sc45 > 0:
             print("405: {:d}".format(sc45))
-        if sc50 > 1:
+        if sc50 > 0:
             print("500: {:d}".format(sc50))
