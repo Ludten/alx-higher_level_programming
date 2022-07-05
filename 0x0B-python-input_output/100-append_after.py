@@ -14,17 +14,12 @@ def append_after(filename="", search_string="", new_string=""):
         search_string (str): string to append after
         new_string (str): string to be added to file
     """
-    with open(filename, 'r', encoding="utf-8") as in_f, \
-            open('out.txt', 'w', encoding="utf-8") as out_f:
-        for line in in_f:
+    out_txt = ""
+    with open(filename, 'r', encoding="utf-8") as f:
+        for line in f:
             if search_string in line:
-                print(line)
                 line = line + new_string
-                out_f.write(line)
-            else:
-                out_f.write(line)
+            out_txt += line
 
-    with open('out.txt', 'r', encoding="utf-8") as out_f, \
-            open(filename, 'w', encoding="utf-8") as in_f:
-        new_str = out_f.read()
-        in_f.write(new_str)
+    with open('out.txt', 'r', encoding="utf-8") as out_f:
+        out_f.write(out_txt)
