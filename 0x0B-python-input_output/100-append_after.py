@@ -21,5 +21,5 @@ def append_after(filename="", search_string="", new_string=""):
                 line = line + new_string
             out_txt += line
 
-    with open('out.txt', 'r', encoding="utf-8") as out_f:
+    with open('out.txt', 'w', encoding="utf-8") as out_f:
         out_f.write(out_txt)
