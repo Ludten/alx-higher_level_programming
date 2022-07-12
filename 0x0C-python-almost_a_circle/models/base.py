@@ -49,7 +49,7 @@ class Base:
             newdict += cls.to_json_string(jlist)
             with open("{:s}.json".format(cls.__name__), 'w',
                       encoding="utf-8") as f:
-                return (f.write(newdict))
+                f.write(newdict)
 
     @staticmethod
     def from_json_string(json_string):
