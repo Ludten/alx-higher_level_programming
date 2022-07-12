@@ -29,9 +29,10 @@ class Base:
         converts list of dictionaries to their
         json representation
         """
-        if list_dictionaries is not None or list_dictionaries != []:
-            return (json.dumps(list_dictionaries))
-        return "[]"
+        if isinstance(list_dictionaries, list):
+            if list_dictionaries is not None or list_dictionaries != []:
+                return (json.dumps(list_dictionaries))
+        return ("[]")
 
     @classmethod
     def save_to_file(cls, list_objs):
