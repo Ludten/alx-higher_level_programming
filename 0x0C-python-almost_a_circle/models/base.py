@@ -40,16 +40,15 @@ class Base:
         converts class instances to their json representation
         and saves them as text files
         """
-        newdict = ""
-        jlist = []
         if isinstance(list_objs, list):
-            if list_objs is not None and list_objs != []:
-                for i in list_objs:
-                    jlist.append(i.to_dictionary())
-            newdict += cls.to_json_string(jlist)
             with open("{:s}.json".format(cls.__name__), 'w',
                       encoding="utf-8") as f:
-                f.write(newdict)
+                if list_objs is None or list_objs == []:
+                    f.write("[]")
+                else:
+                    jlist = [i.to_dictionary()
+                             for i in list_objs if i is not None]
+                    f.write(cls.to_json_string(jlist))
 
     @staticmethod
     def from_json_string(json_string):
