@@ -45,9 +45,7 @@ class Base:
         if isinstance(list_objs, list):
             if list_objs is not None and list_objs != []:
                 for i in list_objs:
-                    if isinstance(i, cls) is True:
-                        if list_objs is not None:
-                            jlist.append(i.to_dictionary())
+                    jlist.append(i.to_dictionary())
             newdict += cls.to_json_string(jlist)
             with open("{:s}.json".format(cls.__name__), 'w',
                       encoding="utf-8") as f:
@@ -72,7 +70,10 @@ class Base:
             The new class instance
         """
         if dictionary is not None and dictionary != {}:
-            tmp = cls(1, 1)
+            if cls.__name__ == 'Rectangle':
+                tmp = cls(1, 1)
+            if cls.__name__ == 'Square':
+                tmp = cls(1)
             tmp.update(**dictionary)
             return tmp
 
