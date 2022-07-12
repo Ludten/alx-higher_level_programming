@@ -45,9 +45,9 @@ class Base:
         if isinstance(list_objs, list):
             if list_objs is not None:
                 for i in list_objs:
-                    if isinstance(i, cls) is True:
+                    if type(i) is type(cls):
                         jlist.append(i.to_dictionary())
-                newdict += cls.to_json_string(jlist)
+            newdict += cls.to_json_string(jlist)
             with open("{:s}.json".format(cls.__name__), 'w',
                       encoding="utf-8") as f:
                 return (f.write(newdict))
