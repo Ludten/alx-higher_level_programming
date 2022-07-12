@@ -42,22 +42,24 @@ class Base:
         """
         newdict = ""
         jlist = []
-        if list_objs is not None:
-            for i in list_objs:
-                if isinstance(i, cls) is True:
-                    jlist.append(i.to_dictionary())
-            newdict += cls.to_json_string(jlist)
-        with open("{:s}.json".format(cls.__name__), 'w',
-                  encoding="utf-8") as f:
-            return (f.write(newdict))
+        if isinstance(list_objs, list):
+            if list_objs is not None:
+                for i in list_objs:
+                    if isinstance(i, cls) is True:
+                        jlist.append(i.to_dictionary())
+                newdict += cls.to_json_string(jlist)
+            with open("{:s}.json".format(cls.__name__), 'w',
+                      encoding="utf-8") as f:
+                return (f.write(newdict))
 
     @staticmethod
     def from_json_string(json_string):
         """
         Convert json to list of dictionary
         """
-        if json_string is not None or json_string != "":
-            return (json.loads(json_string))
+        if isinstance(json_string, str):
+            if json_string is not None or json_string != "":
+                return (json.loads(json_string))
         return []
 
     @classmethod
@@ -68,9 +70,10 @@ class Base:
         Returns:
             The new class instance
         """
-        tmp = cls(1, 1)
-        tmp.update(**dictionary)
-        return tmp
+        if dictionary is not None:
+            tmp = cls(1, 1)
+            tmp.update(**dictionary)
+            return tmp
 
     @classmethod
     def load_from_file(cls):
