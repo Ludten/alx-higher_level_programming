@@ -43,7 +43,7 @@ class Base:
         newdict = ""
         jlist = []
         if isinstance(list_objs, list):
-            if list_objs is not None:
+            if list_objs is not None and list_objs != []:
                 for i in list_objs:
                     if isinstance(i, cls) is True:
                         jlist.append(i.to_dictionary())
