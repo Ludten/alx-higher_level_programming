@@ -3,7 +3,10 @@
 This module is designed to test square.py
 """
 import unittest
+
+from numpy import size
 from models.square import Square
+from models.base import Base
 from io import StringIO
 from unittest.mock import patch
 
@@ -13,15 +16,18 @@ class TestSquare(unittest.TestCase):
     Class to define the unittest
     """
 
+    def setUp(self):
+        Base._Base__nb_objects = 0
+
     def test_var(self):
         """
         test class instance variables
         """
         s1 = Square(10)
         s2 = Square(5, 6, 10)
-        # self.assertEqual(s1.id, 3)
+        self.assertEqual(s1.id, 1)
         self.assertEqual(s1.size, 10)
-        # self.assertEqual(s2.id, 4)
+        self.assertEqual(s2.id, 2)
         self.assertEqual(s2.size, 5)
         self.assertEqual(s2.x, 6)
         self.assertEqual(s2.y, 10)
@@ -39,6 +45,8 @@ class TestSquare(unittest.TestCase):
             b = Square(5, 'foo', 0)
         with self.assertRaises(TypeError):
             b = Square(10, 10, 'bar')
+        with self.assertRaises(TypeError):
+            b = Square(10, 10, 15, 20, 25)
 
     def test_area(self):
         """
@@ -61,17 +69,116 @@ class TestSquare(unittest.TestCase):
         extected_out = '####\n####\n####\n####\n'
 
         self.assertEqual(stdout.getvalue(), extected_out)
+        with self.assertRaises(TypeError):
+            r1.display(5)
+        stdout.truncate(0)
+        stdout.seek(0)
 
         r1 = Square(2, 2, 2)
         r1.display()
         extected_out = '\n\n  ##\n  ##\n'
+        stdout.truncate(0)
+        stdout.seek(0)
 
-    def test_str(self):
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_str(self, stdout):
         """
         test class instance __str__ method
         """
         r1 = Square(4, 2, 1, 12)
-        self.assertEqual(print(r1), print('[Square] (12) 2/1 - 4'))
+        print(r1)
+        expected_out = '[Square] (12) 2/1 - 4\n'
+        self.assertEqual(stdout.getvalue(), expected_out)
+        stdout.truncate(0)
+        stdout.seek(0)
 
         r2 = Square(5, 1)
-        self.assertEqual(print(r2), print('[Square] (1) 1/0 - 5'))
+        print(r2)
+        expected_out = '[Square] (1) 1/0 - 5\n'
+        self.assertEqual(stdout.getvalue(), expected_out)
+        stdout.truncate(0)
+        stdout.seek(0)
+
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_update(self, stdout):
+        """
+        test class instance update method
+        """
+        r1 = Square(10, 10, 10)
+        r1.update(89)
+        print(r1)
+        extected_out = '[Square] (89) 10/10 - 10\n'
+        self.assertEqual(stdout.getvalue(), extected_out)
+        stdout.truncate(0)
+        stdout.seek(0)
+        r1.update(89, 2)
+        print(r1)
+        extected_out = '[Square] (89) 10/10 - 2\n'
+        self.assertEqual(stdout.getvalue(), extected_out)
+        stdout.truncate(0)
+        stdout.seek(0)
+        r1.update(89, 2, 3)
+        print(r1)
+        extected_out = '[Square] (89) 3/10 - 2\n'
+        self.assertEqual(stdout.getvalue(), extected_out)
+        stdout.truncate(0)
+        stdout.seek(0)
+        r1.update(89, 2, 3, 4)
+        print(r1)
+        extected_out = '[Square] (89) 3/4 - 2\n'
+        self.assertEqual(stdout.getvalue(), extected_out)
+        stdout.truncate(0)
+        stdout.seek(0)
+        r1.update(size=1)
+        print(r1)
+        extected_out = '[Square] (89) 3/4 - 1\n'
+        self.assertEqual(stdout.getvalue(), extected_out)
+        stdout.truncate(0)
+        stdout.seek(0)
+        r1.update(size=1, x=2)
+        print(r1)
+        extected_out = '[Square] (89) 2/4 - 1\n'
+        self.assertEqual(stdout.getvalue(), extected_out)
+        stdout.truncate(0)
+        stdout.seek(0)
+        r1.update(y=1, size=2, x=3, id=89)
+        print(r1)
+        extected_out = '[Square] (89) 3/1 - 2\n'
+        self.assertEqual(stdout.getvalue(), extected_out)
+        stdout.truncate(0)
+        stdout.seek(0)
+        r1.update(7, 8, 9, y=1, size=2, x=3, id=89)
+        print(r1)
+        extected_out = '[Square] (7) 9/1 - 8\n'
+        self.assertEqual(stdout.getvalue(), extected_out)
+        stdout.truncate(0)
+        stdout.seek(0)
+
+    def test_to_dict(self):
+        """
+        test class instance to_dictionary method
+        """
+        r1 = Square(10, 1, 9)
+        expected_out = {'x': 1, 'y': 9, 'id': 1, 'size': 10}
+        self.assertEqual(type(r1.to_dictionary()), type(expected_out))
+        self.assertDictEqual(r1.to_dictionary(), expected_out)
+
+        r2 = Square(1)
+        expected_out = {'x': 0, 'y': 0, 'id': 2, 'size': 1}
+        self.assertEqual(type(r2.to_dictionary()), type(expected_out))
+        self.assertDictEqual(r2.to_dictionary(), expected_out)
+
+    def test_to_json_string(self):
+        """
+        test class instance to_json_string method
+        """
+        tdict = {"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}
+        expected = '[{"x": 2, "width": 10, "id": 1, "height": 7, "y": 8}]'
+        self.assertEqual(Square.to_json_string([tdict]), expected)
+        with self.assertRaises(TypeError):
+            Square.to_json_string([tdict], [])
+        tdict = {"x": 2, "size": 10, "id": 1, "y": 8}
+        expected = '[{"x": 2, "size": 10, "id": 1, "y": 8}]'
+        self.assertEqual(Square.to_json_string([tdict]), expected)
+        self.assertEqual(Square.to_json_string([]), "[]")
+        self.assertEqual(Square.to_json_string(None), "[]")
