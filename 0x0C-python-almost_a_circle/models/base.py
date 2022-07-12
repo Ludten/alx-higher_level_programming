@@ -46,7 +46,8 @@ class Base:
             if list_objs is not None and list_objs != []:
                 for i in list_objs:
                     if isinstance(i, cls) is True:
-                        jlist.append(i.to_dictionary())
+                        if list_objs is not None:
+                            jlist.append(i.to_dictionary())
             newdict += cls.to_json_string(jlist)
             with open("{:s}.json".format(cls.__name__), 'w',
                       encoding="utf-8") as f:
