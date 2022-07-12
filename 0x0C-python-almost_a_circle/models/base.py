@@ -70,7 +70,7 @@ class Base:
         Returns:
             The new class instance
         """
-        if dictionary is not None:
+        if dictionary is not None and dictionary != {}:
             tmp = cls(1, 1)
             tmp.update(**dictionary)
             return tmp
