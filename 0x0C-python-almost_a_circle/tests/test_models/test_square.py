@@ -307,3 +307,59 @@ class TestSquare(unittest.TestCase):
                 PATH) and os.access(PATH, os.R_OK) is False:
             nolist = Square.load_from_file()
             self.assertCountEqual(nolist, [])
+
+    def test_csv(self):
+        """
+        test class instance csv method
+        """
+        r1 = Square(10, 2, 8)
+        r2 = Square(2)
+        Square.save_to_file_csv([r1, r2])
+        PATH = './{}.csv'.format(Square.__name__)
+        self.assertEqual(os.path.isfile(
+            PATH) and os.access(PATH, os.R_OK), True)
+        content = self.write_file('{}.csv'.format(Square.__name__))
+        expected_out = '1,10,2,8\n2,2,0,0\n'
+        self.assertEqual(content, expected_out)
+
+        rec1 = Square(5, 2, 8)
+        rec2 = Square(2)
+        Square.save_to_file_csv([rec1, rec2])
+        PATH = './{}.csv'.format(Square.__name__)
+        self.assertEqual(os.path.isfile(
+            PATH) and os.access(PATH, os.R_OK), True)
+        cont = self.write_file('{}.csv'.format(Square.__name__))
+        expected = '3,5,2,8\n4,2,0,0\n'
+        self.assertEqual(cont, expected)
+        Square.save_to_file_csv(None)
+        PATH = './{}.csv'.format(Square.__name__)
+        self.assertEqual(os.path.isfile(
+            PATH) and os.access(PATH, os.R_OK), True)
+        cont = self.write_file('{}.csv'.format(Square.__name__))
+        expected = ''
+        self.assertEqual(cont, expected)
+        with self.assertRaises(Exception):
+            Square.save_to_file_csv(())
+        self.assertEqual(cont, expected)
+        with self.assertRaises(TypeError):
+            Square.save_to_file_csv(2)
+        with self.assertRaises(Exception):
+            Square.save_to_file_csv('foo')
+        with self.assertRaises(TypeError):
+            Square.save_to_file_csv()
+
+        r1 = Square(10, 2, 8)
+        r2 = Square(2)
+        list_Squares_input = [r1, r2]
+        Square.save_to_file_csv(list_Squares_input)
+        tlist = Square.load_from_file_csv()
+        for cl in tlist:
+            self.assertEqual(isinstance(cl, Square), True)
+        with self.assertRaises(TypeError):
+            nlist = Square.load_from_file_csv(5)
+        os.remove(PATH)
+
+        if os.path.isfile(
+                PATH) and os.access(PATH, os.R_OK) is False:
+            nolist = Square.load_from_file_csv()
+            self.assertCountEqual(nolist, [])

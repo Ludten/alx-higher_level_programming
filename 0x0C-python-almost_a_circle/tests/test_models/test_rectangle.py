@@ -328,3 +328,59 @@ class TestRectangle(unittest.TestCase):
                 PATH) and os.access(PATH, os.R_OK) is False:
             nolist = Rectangle.load_from_file()
             self.assertCountEqual(nolist, [])
+
+    def test_csv(self):
+        """
+        test class instance csv method
+        """
+        r1 = Rectangle(10, 7, 2, 8)
+        r2 = Rectangle(2, 4)
+        Rectangle.save_to_file_csv([r1, r2])
+        PATH = './{}.csv'.format(Rectangle.__name__)
+        self.assertEqual(os.path.isfile(
+            PATH) and os.access(PATH, os.R_OK), True)
+        content = self.write_file('{}.csv'.format(Rectangle.__name__))
+        expected_out = '1,10,7,2,8\n2,2,4,0,0\n'
+        self.assertEqual(content, expected_out)
+
+        rec1 = Rectangle(5, 10, 2, 8)
+        rec2 = Rectangle(2, 4)
+        Rectangle.save_to_file_csv([rec1, rec2])
+        PATH = './{}.csv'.format(Rectangle.__name__)
+        self.assertEqual(os.path.isfile(
+            PATH) and os.access(PATH, os.R_OK), True)
+        cont = self.write_file('{}.csv'.format(Rectangle.__name__))
+        expected = '3,5,10,2,8\n4,2,4,0,0\n'
+        self.assertEqual(cont, expected)
+        Rectangle.save_to_file_csv(None)
+        PATH = './{}.csv'.format(Rectangle.__name__)
+        self.assertEqual(os.path.isfile(
+            PATH) and os.access(PATH, os.R_OK), True)
+        cont = self.write_file('{}.csv'.format(Rectangle.__name__))
+        expected = ''
+        self.assertEqual(cont, expected)
+        with self.assertRaises(Exception):
+            Rectangle.save_to_file_csv(())
+        self.assertEqual(cont, expected)
+        with self.assertRaises(TypeError):
+            Rectangle.save_to_file_csv(2)
+        with self.assertRaises(Exception):
+            Rectangle.save_to_file_csv('foo')
+        with self.assertRaises(TypeError):
+            Rectangle.save_to_file_csv()
+
+        r1 = Rectangle(10, 7, 2, 8)
+        r2 = Rectangle(2, 4)
+        list_rectangles_input = [r1, r2]
+        Rectangle.save_to_file_csv(list_rectangles_input)
+        tlist = Rectangle.load_from_file_csv()
+        for cl in tlist:
+            self.assertEqual(isinstance(cl, Rectangle), True)
+        with self.assertRaises(TypeError):
+            nlist = Rectangle.load_from_file_csv(5)
+        os.remove(PATH)
+
+        if os.path.isfile(
+                PATH) and os.access(PATH, os.R_OK) is False:
+            nolist = Rectangle.load_from_file_csv()
+            self.assertCountEqual(nolist, [])

@@ -116,9 +116,9 @@ class Base:
                 for dicts in jlist:
                     writer.writerow(dicts)
         else:
-            with open("{:s}.json".format(cls.__name__), 'w',
+            with open("{:s}.csv".format(cls.__name__), 'w',
                       encoding="utf-8") as f:
-                f.write("[]")
+                f.write("")
 
     @classmethod
     def load_from_file_csv(cls):
