@@ -3,6 +3,7 @@
 This module is designed to test square.py
 """
 import unittest
+import os
 from models.rectangle import Rectangle
 from models.base import Base
 from io import StringIO
@@ -201,3 +202,86 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(Rectangle.to_json_string([tdict]), expected)
         self.assertEqual(Rectangle.to_json_string([]), "[]")
         self.assertEqual(Rectangle.to_json_string(None), "[]")
+
+    def test_save_to_file(self):
+        """
+        test class instance save_to_file method
+        """
+        r1 = Rectangle(10, 7, 2, 8)
+        r2 = Rectangle(2, 4)
+        Rectangle.save_to_file([r1, r2])
+        PATH = './{}.json'.format(Rectangle.__name__)
+        self.assertEqual(os.path.isfile(
+            PATH) and os.access(PATH, os.R_OK), True)
+        cont = self.write_file('{}.json'.format(Rectangle.__name__))
+        expected = '[{"id": 1, "width": 10, "height": 7, "x": 2, "y": 8}, \
+{"id": 2, "width": 2, "height": 4, "x": 0, "y": 0}]'
+        self.assertEqual(cont, expected)
+        r1 = Rectangle(5, 10, 2, 8)
+        r2 = Rectangle(2, 4)
+        Rectangle.save_to_file([r1, r2])
+        PATH = './{}.json'.format(Rectangle.__name__)
+        self.assertEqual(os.path.isfile(
+            PATH) and os.access(PATH, os.R_OK), True)
+        cont = self.write_file('{}.json'.format(Rectangle.__name__))
+        expected = '[{"id": 3, "width": 5, "height": 10, "x": 2, "y": 8}, \
+{"id": 4, "width": 2, "height": 4, "x": 0, "y": 0}]'
+        self.assertEqual(cont, expected)
+        Rectangle.save_to_file(None)
+        PATH = './{}.json'.format(Rectangle.__name__)
+        self.assertEqual(os.path.isfile(
+            PATH) and os.access(PATH, os.R_OK), True)
+        cont = self.write_file('{}.json'.format(Rectangle.__name__))
+        expected = '[]'
+        self.assertEqual(cont, expected)
+        Rectangle.save_to_file(())
+        PATH = './{}.json'.format(Rectangle.__name__)
+        self.assertEqual(os.path.isfile(
+            PATH) and os.access(PATH, os.R_OK), True)
+        cont = self.write_file('{}.json'.format(Rectangle.__name__))
+        expected = '[]'
+        self.assertEqual(cont, expected)
+        with self.assertRaises(TypeError):
+            Rectangle.save_to_file(2)
+        with self.assertRaises(AttributeError):
+            Rectangle.save_to_file('foo')
+        with self.assertRaises(TypeError):
+            Rectangle.save_to_file()
+        os.remove(PATH)
+
+    @staticmethod
+    def write_file(filename):
+        """
+        A function that opens and reads a file
+
+        Args:
+            filename (str)
+
+        Returns:
+            number of characters written into file
+        """
+        with open(filename, 'r', encoding="utf-8") as f:
+            text = ""
+            for line in f:
+                text += line
+            return text
+
+    def test_from_json_string(self):
+        """
+        test class instance from_json_string method
+        """
+        jsonstr = '[{"id": 3, "width": 5, "height": 10, "x": 2, "y": 8}, \
+{"id": 4, "width": 2, "height": 4, "x": 0, "y": 0}]'
+        tlist = Rectangle.from_json_string(jsonstr)
+        expected = [{"id": 3, "width": 5, "height": 10, "x": 2, "y": 8},
+                    {"id": 4, "width": 2, "height": 4, "x": 0, "y": 0}]
+        self.assertCountEqual(tlist, expected)
+        jsonstr = ''
+        tlist = Rectangle.from_json_string(jsonstr)
+        expected = []
+        self.assertCountEqual(tlist, expected)
+        tlist = Rectangle.from_json_string(None)
+        expected = []
+        self.assertCountEqual(tlist, expected)
+        with self.assertRaises(TypeError):
+            Rectangle.from_json_string()

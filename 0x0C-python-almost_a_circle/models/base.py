@@ -55,7 +55,7 @@ class Base:
         Convert json to list of dictionary
         """
         if isinstance(json_string, str):
-            if json_string is not None or json_string != "":
+            if json_string is not None and json_string != "":
                 return (json.loads(json_string))
         return []
 
