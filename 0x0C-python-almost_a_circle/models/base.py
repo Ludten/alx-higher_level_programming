@@ -102,7 +102,7 @@ class Base:
         and saves them as text files
         """
         jlist = []
-        if list_objs is not None:
+        if list_objs is not None and list_objs != []:
             for i in list_objs:
                 if isinstance(i, cls) is True:
                     jlist.append(i.to_dictionary())
@@ -110,11 +110,15 @@ class Base:
                 fieldname = []
                 for keys in jlist[0]:
                     fieldname.append(keys)
-        with open("{:s}.csv".format(cls.__name__), 'w',
-                  encoding="utf-8") as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames=fieldname)
-            for dicts in jlist:
-                writer.writerow(dicts)
+            with open("{:s}.csv".format(cls.__name__), 'w',
+                      encoding="utf-8") as csvfile:
+                writer = csv.DictWriter(csvfile, fieldnames=fieldname)
+                for dicts in jlist:
+                    writer.writerow(dicts)
+        else:
+            with open("{:s}.json".format(cls.__name__), 'w',
+                      encoding="utf-8") as f:
+                f.write("[]")
 
     @classmethod
     def load_from_file_csv(cls):
