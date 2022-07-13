@@ -41,3 +41,21 @@ class TestBase(unittest.TestCase):
         self.assertEqual(Base.to_json_string([tdict]), expected)
         self.assertEqual(Base.to_json_string([]), "[]")
         self.assertEqual(Base.to_json_string(None), "[]")
+
+    def test_from_json_string(self):
+        """
+        test class instance from_json_string method
+        """
+        jsonstr = '[{"id": 3}, {"id": 4}]'
+        tlist = Base.from_json_string(jsonstr)
+        expected = [{"id": 3}, {"id": 4}]
+        self.assertCountEqual(tlist, expected)
+        jsonstr = ''
+        tlist = Base.from_json_string(jsonstr)
+        expected = []
+        self.assertCountEqual(tlist, expected)
+        tlist = Base.from_json_string(None)
+        expected = []
+        self.assertCountEqual(tlist, expected)
+        with self.assertRaises(TypeError):
+            Base.from_json_string()

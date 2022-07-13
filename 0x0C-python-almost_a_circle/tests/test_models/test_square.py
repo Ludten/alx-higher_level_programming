@@ -226,7 +226,6 @@ class TestSquare(unittest.TestCase):
             Square.save_to_file('foo')
         with self.assertRaises(TypeError):
             Square.save_to_file()
-        os.remove(PATH)
 
     @staticmethod
     def write_file(filename):
@@ -264,3 +263,47 @@ class TestSquare(unittest.TestCase):
         self.assertCountEqual(tlist, expected)
         with self.assertRaises(TypeError):
             Square.from_json_string()
+
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_create(self, stdout):
+        """
+        test class instance create method
+        """
+        dictionary = {"id": 3, "size": 3, "x": 1, "y": 0}
+        r1 = Square.create(**dictionary)
+        print(r1)
+        expected_out = '[Square] (3) 1/0 - 3\n'
+        self.assertEqual(stdout.getvalue(), expected_out)
+        with self.assertRaises(TypeError):
+            r1 = Square.create(1)
+        with self.assertRaises(TypeError):
+            r1 = Square.create('foo')
+        with self.assertRaises(TypeError):
+            r1 = Square.create((4, 5))
+        with self.assertRaises(TypeError):
+            r1 = Square.create(['foo'])
+        r2 = Square.create()
+        self.assertEqual(r2, None)
+        with self.assertRaises(TypeError):
+            r2 = Square.create('foo', 5)
+
+    def test_load_from_file(self):
+        """
+        test class instance load_from_file method
+        """
+        PATH = './{}.json'.format(Square.__name__)
+        s1 = Square(5)
+        s2 = Square(7, 9, 1)
+        list_squares_input = [s1, s2]
+        Square.save_to_file(list_squares_input)
+        tlist = Square.load_from_file()
+        for cl in tlist:
+            self.assertEqual(isinstance(cl, Square), True)
+        with self.assertRaises(TypeError):
+            nlist = Square.load_from_file(5)
+        os.remove(PATH)
+
+        if os.path.isfile(
+                PATH) and os.access(PATH, os.R_OK) is False:
+            nolist = Square.load_from_file()
+            self.assertCountEqual(nolist, [])

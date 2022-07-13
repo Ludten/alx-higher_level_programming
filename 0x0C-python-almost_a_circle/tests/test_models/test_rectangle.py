@@ -247,7 +247,6 @@ class TestRectangle(unittest.TestCase):
             Rectangle.save_to_file('foo')
         with self.assertRaises(TypeError):
             Rectangle.save_to_file()
-        os.remove(PATH)
 
     @staticmethod
     def write_file(filename):
@@ -285,3 +284,47 @@ class TestRectangle(unittest.TestCase):
         self.assertCountEqual(tlist, expected)
         with self.assertRaises(TypeError):
             Rectangle.from_json_string()
+
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_create(self, stdout):
+        """
+        test class instance create method
+        """
+        dictionary = {"id": 3, "width": 3, "height": 5, "x": 1, "y": 0}
+        r1 = Rectangle.create(**dictionary)
+        print(r1)
+        expected_out = '[Rectangle] (3) 1/0 - 3/5\n'
+        self.assertEqual(stdout.getvalue(), expected_out)
+        with self.assertRaises(TypeError):
+            r1 = Rectangle.create(1)
+        with self.assertRaises(TypeError):
+            r1 = Rectangle.create('foo')
+        with self.assertRaises(TypeError):
+            r1 = Rectangle.create((4, 5))
+        with self.assertRaises(TypeError):
+            r1 = Rectangle.create(['foo'])
+        r2 = Rectangle.create()
+        self.assertEqual(r2, None)
+        with self.assertRaises(TypeError):
+            r2 = Rectangle.create('foo', 5)
+
+    def test_load_from_file(self):
+        """
+        test class instance load_from_file method
+        """
+        PATH = './{}.json'.format(Rectangle.__name__)
+        r1 = Rectangle(10, 7, 2, 8)
+        r2 = Rectangle(2, 4)
+        list_rectangles_input = [r1, r2]
+        Rectangle.save_to_file(list_rectangles_input)
+        tlist = Rectangle.load_from_file()
+        for cl in tlist:
+            self.assertEqual(isinstance(cl, Rectangle), True)
+        with self.assertRaises(TypeError):
+            nlist = Rectangle.load_from_file(5)
+        os.remove(PATH)
+
+        if os.path.isfile(
+                PATH) and os.access(PATH, os.R_OK) is False:
+            nolist = Rectangle.load_from_file()
+            self.assertCountEqual(nolist, [])
