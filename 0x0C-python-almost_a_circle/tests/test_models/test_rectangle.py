@@ -41,9 +41,9 @@ class TestRectangle(unittest.TestCase):
         with self.assertRaises(ValueError):
             b = Rectangle(-2, 10)
         with self.assertRaises(ValueError):
-            b = Rectangle(15, 0)
+            b = Rectangle(1, 0)
         with self.assertRaises(ValueError):
-            b = Rectangle(0, 10)
+            b = Rectangle(0, 2)
         with self.assertRaises(TypeError):
             b = Rectangle('foo', 5)
         with self.assertRaises(TypeError):
@@ -221,6 +221,7 @@ class TestRectangle(unittest.TestCase):
         expected = '[{"id": 1, "width": 10, "height": 7, "x": 2, "y": 8}, \
 {"id": 2, "width": 2, "height": 4, "x": 0, "y": 0}]'
         self.assertEqual(cont, expected)
+
         r1 = Rectangle(5, 10, 2, 8)
         r2 = Rectangle(2, 4)
         Rectangle.save_to_file([r1, r2])
@@ -231,6 +232,7 @@ class TestRectangle(unittest.TestCase):
         expected = '[{"id": 3, "width": 5, "height": 10, "x": 2, "y": 8}, \
 {"id": 4, "width": 2, "height": 4, "x": 0, "y": 0}]'
         self.assertEqual(cont, expected)
+
         Rectangle.save_to_file(None)
         PATH = './{}.json'.format(Rectangle.__name__)
         self.assertEqual(os.path.isfile(
@@ -238,6 +240,7 @@ class TestRectangle(unittest.TestCase):
         cont = self.write_file('{}.json'.format(Rectangle.__name__))
         expected = '[]'
         self.assertEqual(cont, expected)
+
         Rectangle.save_to_file(())
         PATH = './{}.json'.format(Rectangle.__name__)
         self.assertEqual(os.path.isfile(
@@ -245,6 +248,7 @@ class TestRectangle(unittest.TestCase):
         cont = self.write_file('{}.json'.format(Rectangle.__name__))
         expected = '[]'
         self.assertEqual(cont, expected)
+
         Rectangle.save_to_file([])
         PATH = './{}.json'.format(Rectangle.__name__)
         self.assertEqual(os.path.isfile(
@@ -252,7 +256,7 @@ class TestRectangle(unittest.TestCase):
         cont = self.write_file('{}.json'.format(Rectangle.__name__))
         expected = '[]'
         self.assertEqual(cont, expected)
-        os.remove(PATH)
+
         with self.assertRaises(TypeError):
             Rectangle.save_to_file(2)
         with self.assertRaises(AttributeError):
