@@ -235,6 +235,7 @@ class TestSquare(unittest.TestCase):
             Square.save_to_file('foo')
         with self.assertRaises(TypeError):
             Square.save_to_file()
+        os.remove(PATH)
 
     @staticmethod
     def write_file(filename):

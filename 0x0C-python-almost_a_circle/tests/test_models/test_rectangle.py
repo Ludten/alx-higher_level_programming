@@ -252,12 +252,14 @@ class TestRectangle(unittest.TestCase):
         cont = self.write_file('{}.json'.format(Rectangle.__name__))
         expected = '[]'
         self.assertEqual(cont, expected)
+        os.remove(PATH)
         with self.assertRaises(TypeError):
             Rectangle.save_to_file(2)
         with self.assertRaises(AttributeError):
             Rectangle.save_to_file('foo')
         with self.assertRaises(TypeError):
             Rectangle.save_to_file()
+        os.remove(PATH)
 
     @staticmethod
     def write_file(filename):
