@@ -222,6 +222,14 @@ class TestRectangle(unittest.TestCase):
 {"id": 2, "width": 2, "height": 4, "x": 0, "y": 0}]'
         self.assertEqual(cont, expected)
 
+        Rectangle.save_to_file([])
+        PATH = './{}.json'.format(Rectangle.__name__)
+        self.assertEqual(os.path.isfile(
+            PATH) and os.access(PATH, os.R_OK), True)
+        cont = self.write_file('{}.json'.format(Rectangle.__name__))
+        expected = '[]'
+        self.assertEqual(cont, expected)
+
         r1 = Rectangle(5, 10, 2, 8)
         r2 = Rectangle(2, 4)
         Rectangle.save_to_file([r1, r2])
@@ -234,22 +242,6 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(cont, expected)
 
         Rectangle.save_to_file(None)
-        PATH = './{}.json'.format(Rectangle.__name__)
-        self.assertEqual(os.path.isfile(
-            PATH) and os.access(PATH, os.R_OK), True)
-        cont = self.write_file('{}.json'.format(Rectangle.__name__))
-        expected = '[]'
-        self.assertEqual(cont, expected)
-
-        Rectangle.save_to_file(())
-        PATH = './{}.json'.format(Rectangle.__name__)
-        self.assertEqual(os.path.isfile(
-            PATH) and os.access(PATH, os.R_OK), True)
-        cont = self.write_file('{}.json'.format(Rectangle.__name__))
-        expected = '[]'
-        self.assertEqual(cont, expected)
-
-        Rectangle.save_to_file([])
         PATH = './{}.json'.format(Rectangle.__name__)
         self.assertEqual(os.path.isfile(
             PATH) and os.access(PATH, os.R_OK), True)

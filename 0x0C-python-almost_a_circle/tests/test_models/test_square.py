@@ -199,6 +199,14 @@ class TestSquare(unittest.TestCase):
 {"id": 2, "size": 2, "x": 0, "y": 0}]'
         self.assertEqual(cont, expected)
 
+        Square.save_to_file([])
+        PATH = './{}.json'.format(Square.__name__)
+        self.assertEqual(os.path.isfile(
+            PATH) and os.access(PATH, os.R_OK), True)
+        cont = self.write_file('{}.json'.format(Square.__name__))
+        expected = '[]'
+        self.assertEqual(cont, expected)
+
         r1 = Square(5, 2, 8)
         r2 = Square(2)
         Square.save_to_file([r1, r2])
@@ -211,22 +219,6 @@ class TestSquare(unittest.TestCase):
         self.assertEqual(cont, expected)
 
         Square.save_to_file(None)
-        PATH = './{}.json'.format(Square.__name__)
-        self.assertEqual(os.path.isfile(
-            PATH) and os.access(PATH, os.R_OK), True)
-        cont = self.write_file('{}.json'.format(Square.__name__))
-        expected = '[]'
-        self.assertEqual(cont, expected)
-
-        Square.save_to_file(())
-        PATH = './{}.json'.format(Square.__name__)
-        self.assertEqual(os.path.isfile(
-            PATH) and os.access(PATH, os.R_OK), True)
-        cont = self.write_file('{}.json'.format(Square.__name__))
-        expected = '[]'
-        self.assertEqual(cont, expected)
-
-        Square.save_to_file([])
         PATH = './{}.json'.format(Square.__name__)
         self.assertEqual(os.path.isfile(
             PATH) and os.access(PATH, os.R_OK), True)
