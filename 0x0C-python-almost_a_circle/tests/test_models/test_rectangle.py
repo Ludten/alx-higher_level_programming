@@ -40,6 +40,10 @@ class TestRectangle(unittest.TestCase):
             b = Rectangle(15, -1)
         with self.assertRaises(ValueError):
             b = Rectangle(-2, 10)
+        with self.assertRaises(ValueError):
+            b = Rectangle(15, 0)
+        with self.assertRaises(ValueError):
+            b = Rectangle(0, 10)
         with self.assertRaises(TypeError):
             b = Rectangle('foo', 5)
         with self.assertRaises(TypeError):
@@ -235,6 +239,13 @@ class TestRectangle(unittest.TestCase):
         expected = '[]'
         self.assertEqual(cont, expected)
         Rectangle.save_to_file(())
+        PATH = './{}.json'.format(Rectangle.__name__)
+        self.assertEqual(os.path.isfile(
+            PATH) and os.access(PATH, os.R_OK), True)
+        cont = self.write_file('{}.json'.format(Rectangle.__name__))
+        expected = '[]'
+        self.assertEqual(cont, expected)
+        Rectangle.save_to_file([])
         PATH = './{}.json'.format(Rectangle.__name__)
         self.assertEqual(os.path.isfile(
             PATH) and os.access(PATH, os.R_OK), True)

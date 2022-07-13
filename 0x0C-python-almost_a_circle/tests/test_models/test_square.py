@@ -34,6 +34,8 @@ class TestSquare(unittest.TestCase):
             b = Square()
         with self.assertRaises(ValueError):
             b = Square(-2)
+        with self.assertRaises(ValueError):
+            b = Square(0)
         with self.assertRaises(TypeError):
             b = Square('foo')
         with self.assertRaises(ValueError):
@@ -207,6 +209,13 @@ class TestSquare(unittest.TestCase):
 {"id": 4, "size": 2, "x": 0, "y": 0}]'
         self.assertEqual(cont, expected)
         Square.save_to_file(None)
+        PATH = './{}.json'.format(Square.__name__)
+        self.assertEqual(os.path.isfile(
+            PATH) and os.access(PATH, os.R_OK), True)
+        cont = self.write_file('{}.json'.format(Square.__name__))
+        expected = '[]'
+        self.assertEqual(cont, expected)
+        Square.save_to_file(())
         PATH = './{}.json'.format(Square.__name__)
         self.assertEqual(os.path.isfile(
             PATH) and os.access(PATH, os.R_OK), True)
