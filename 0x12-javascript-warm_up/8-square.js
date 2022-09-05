@@ -8,7 +8,7 @@ if (isNaN(out)) {
     for (let i = 0; i < out; i++) {
       let disp = '';
       for (let j = 0; j < out; j++) {
-        disp += 'x';
+        disp += 'X';
       }
       console.log(disp);
     }
