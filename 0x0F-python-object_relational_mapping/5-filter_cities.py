@@ -32,7 +32,8 @@ def mydbsql():
         """
 
         cursor.execute(sql, (sys.argv[4], ))
-        print(', '.join(["{:s}".format(row[0]) for row in cursor.fetchall()]))
+        print(', '.join(["{:s}".format(row[0]) for row in cursor.fetchall()
+                         if row[1] == sys.argv[4]]))
     except (Exception, MySQLdb.DatabaseError) as error:
         print(error)
     finally:
