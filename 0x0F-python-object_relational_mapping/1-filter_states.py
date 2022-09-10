@@ -23,15 +23,17 @@ def mydbsql():
         )
         cursor = db.cursor()
 
+        sql = """
+        SELECT * FROM states
+        WHERE name LIKE "N%"
+        ORDER BY id ASC
+        """
+
         cursor.execute(
-            """SELECT * FROM states
-            WHERE name LIKE "N%"
-            ORDER BY id ASC
-            """
-        )
+            "SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC")
         rows = cursor.fetchall()
         for row in rows:
-            print("{}".format(row))
+            print(row)
     except (Exception, MySQLdb.DatabaseError) as error:
         print(error)
     finally:
