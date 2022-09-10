@@ -10,7 +10,7 @@ import MySQLdb
 def mydbsql():
     """
     A function that starts a mysqldb connection and returns all
-    states in a database
+    states with name starting with N in a database
     """
     db = None
     try:
@@ -23,7 +23,13 @@ def mydbsql():
         )
         cursor = db.cursor()
 
-        cursor.execute("SELECT * FROM states ORDER BY id ASC")
+        sql = """
+        SELECT * FROM states
+        WHERE name LIKE "N%"
+        ORDER BY id ASC
+        """
+
+        cursor.execute(sql)
         rows = cursor.fetchall()
         for row in rows:
             print("{}".format(row))

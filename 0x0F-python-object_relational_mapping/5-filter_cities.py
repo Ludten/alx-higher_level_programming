@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-A module that lists all states from a database
+A module that lists all cities from a database
 """
 
 import sys
@@ -10,7 +10,7 @@ import MySQLdb
 def mydbsql():
     """
     A function that starts a mysqldb connection and returns all
-    states in a database
+    cities in a particular state in a database
     """
     db = None
     try:
@@ -23,10 +23,22 @@ def mydbsql():
         )
         cursor = db.cursor()
 
-        cursor.execute("SELECT * FROM states ORDER BY id ASC")
+        sql = """
+        SELECT c.name
+        FROM cities c
+        JOIN states s
+        WHERE s.name = %s
+        ORDER BY c.id ASC;
+        """
+
+        cursor.execute(sql, (sys.argv[4], ))
         rows = cursor.fetchall()
-        for row in rows:
-            print("{}".format(row))
+        for i in range(len(rows)):
+            if i == 0:
+                print(rows[i][0], end="")
+            else:
+                print(',', rows[i][0], end="")
+        print('')
     except (Exception, MySQLdb.DatabaseError) as error:
         print(error)
     finally:
