@@ -24,7 +24,7 @@ def mydbsql():
         cursor = db.cursor()
 
         sql = """
-        SELECT c.name
+        SELECT c.name, s.name
         FROM cities c
         JOIN states s
         WHERE s.name = %s
@@ -34,10 +34,11 @@ def mydbsql():
         cursor.execute(sql, (sys.argv[4], ))
         rows = cursor.fetchall()
         for i in range(len(rows)):
-            if i == 0:
-                print(rows[i][0], end="")
-            else:
-                print(',', rows[i][0], end="")
+            if rows[i][1] == sys.argv[4]:
+                if i == 0:
+                    print(rows[i][0], end="")
+                else:
+                    print(',', rows[i][0], end="")
         print('')
     except (Exception, MySQLdb.DatabaseError) as error:
         print(error)
