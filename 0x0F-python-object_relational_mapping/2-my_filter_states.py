@@ -25,14 +25,14 @@ def mydbsql():
 
         sql = """
         SELECT * FROM states
-        WHERE name LIKE "{}"
+        WHERE name LIKE "{:s}"
         ORDER BY id ASC
         """.format(sys.argv[4])
 
         cursor.execute(sql)
         rows = cursor.fetchall()
         for row in rows:
-            print("{}".format(row))
+            print(row)
     except (Exception, MySQLdb.DatabaseError) as error:
         print(error)
     finally:

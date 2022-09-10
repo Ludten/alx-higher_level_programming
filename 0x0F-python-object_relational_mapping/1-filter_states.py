@@ -29,11 +29,11 @@ def mydbsql():
         ORDER BY id ASC
         """
 
-        cursor.execute(
-            "SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC")
+        cursor.execute(sql)
         rows = cursor.fetchall()
         for row in rows:
-            print(row)
+            if row[1][0] == 'N':
+                print(row)
     except (Exception, MySQLdb.DatabaseError) as error:
         print(error)
     finally:
