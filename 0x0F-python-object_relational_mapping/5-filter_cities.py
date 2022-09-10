@@ -27,13 +27,14 @@ def mydbsql():
         SELECT c.name, s.name
         FROM cities c
         JOIN states s
+        ON c.state_id = s.id
         WHERE s.name = %s
         ORDER BY c.id ASC;
         """
 
         cursor.execute(sql, (sys.argv[4], ))
-        print(', '.join(["{:s}".format(row[0]) for row in cursor.fetchall()
-                         if row[1] == sys.argv[4]]))
+        print(', '.join(["{:s}".format(row[0])
+                         for row in cursor.fetchall()]))
     except (Exception, MySQLdb.DatabaseError) as error:
         print(error)
     finally:
