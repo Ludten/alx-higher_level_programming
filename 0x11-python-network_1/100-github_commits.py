@@ -17,10 +17,10 @@ if __name__ == "__main__":
     r = requests.get(
         'https://api.github.com/repos/{}/{}/commits\
 ?per_page=10&order=asc&sort=committer-date'.
-        format(sys.argv[1], sys.argv[2])
+        format(sys.argv[2], sys.argv[1])
     )
     body = r.json()
-    body.sort(reverse=True, key=myFunc)
+    # body.sort(reverse=True, key=myFunc)
     for items in body:
         if 'sha' in items:
             print('{}: {}'.format(items['sha'],
