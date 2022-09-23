@@ -5,6 +5,11 @@ repository “rails” by the user
 """
 
 
+def myFunc(e):
+    """a function that returns date"""
+    return e['commit']['author']['date']
+
+
 if __name__ == "__main__":
     import requests
     import sys
@@ -14,6 +19,7 @@ if __name__ == "__main__":
             sys.argv[1], sys.argv[2])
     )
     body = r.json()
+    body.sort(reverse=True, key=myFunc)
     for items in body:
         if 'sha' in items:
             print('{}: {}'.format(items['sha'],
