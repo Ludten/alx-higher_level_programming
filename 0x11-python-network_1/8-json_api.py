@@ -10,15 +10,16 @@ if __name__ == "__main__":
     import sys
 
     value = {}
-    try:
+    if len(sys.argv) > 1:
         value['q'] = sys.argv[1]
-    except IndexError:
+    else:
         value['q'] = ""
     r = requests.post('http://0.0.0.0:5000/search_user', data=value)
     try:
-        if r.json() and r.json() != {}:
-            print('[{}] {}'.format(r.json()['id'], r.json()['name']))
-        elif r.json() == {}:
+        body = r.json()
+        if body and body != {}:
+            print('[{}] {}'.format(body['id'], body['name']))
+        elif body == {}:
             print('No result')
     except requests.exceptions.JSONDecodeError:
         print('Not a valid JSON')
