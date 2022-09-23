@@ -20,7 +20,7 @@ if __name__ == "__main__":
         format(sys.argv[1], sys.argv[2])
     )
     body = r.json()
-    # body.sort(reverse=True, key=myFunc)
+    body.sort(reverse=True, key=myFunc)
     for items in body:
         if 'sha' in items:
             print('{}: {}'.format(items['sha'],
