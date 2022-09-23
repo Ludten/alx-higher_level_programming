@@ -19,7 +19,7 @@ if __name__ == "__main__":
         body = r.json()
         if body and body != {}:
             print('[{}] {}'.format(body['id'], body['name']))
-        elif body == {}:
+        else:
             print('No result')
-    except requests.exceptions.JSONDecodeError:
+    except Exception:
         print('Not a valid JSON')
