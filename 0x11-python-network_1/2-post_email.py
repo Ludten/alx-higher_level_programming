@@ -5,7 +5,8 @@ A script takes in a URL & an email and displays the body of the response
 
 
 if __name__ == "__main__":
-    import urllib
+    import urllib.request
+    import urllib.parse
     import sys
 
     value = {}
