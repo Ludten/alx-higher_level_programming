@@ -20,7 +20,7 @@ try {
         }
       }
     }
-    console.log(JSON.parse(JSON.stringify(pdict)));
+    console.log(pdict);
   });
 } catch (error) {
   console.log(error);
