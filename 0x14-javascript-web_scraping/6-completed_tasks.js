@@ -3,20 +3,21 @@ const request = require('request');
 
 const args = process.argv;
 const url = args[2];
-const pdict = {};
 
 try {
-  request(url + '?completed=true', (error, response, body) => {
+  request(url, (error, response, body) => {
     if (error) throw error;
     const obj = JSON.parse(body);
+    const filtered = obj.filter(a => a.completed == true)
     let ctr = 0;
-    for (let i = 0; i < obj.length; i++) {
-      if (obj[i].userId in pdict) {
-        pdict[obj[i].userId] = ++ctr;
-      } else {
-        ctr = 0;
-        pdict[obj[i].userId] = ++ctr;
-      }
+    const pdict = {};
+    for (let i = 0; i < filtered.length; i++) {
+        if (filtered[i].userId in pdict) {
+          pdict[filtered[i].userId] = ++ctr;
+        } else {
+          ctr = 0;
+          pdict[filtered[i].userId] = ++ctr;
+        }
     }
     console.log(pdict);
   });
