@@ -3,7 +3,7 @@ const request = require('request');
 
 const args = process.argv;
 const url = args[2];
-let pdict = {}
+const pdict = {};
 
 try {
   request(url, (error, response, body) => {
@@ -11,16 +11,16 @@ try {
     const obj = JSON.parse(body);
     let ctr = 0;
     for (let i = 0; i < obj.length; i++) {
-      if (obj[i]['completed'] == true) {
-        if (obj[i]['userId'] in pdict) {
-          pdict[obj[i]['userId']] = ++ctr;
+      if (obj[i].completed === true) {
+        if (obj[i].userId in pdict) {
+          pdict[obj[i].userId] = ++ctr;
         } else {
           ctr = 0;
-          pdict[obj[i]['userId']] = ++ctr;
+          pdict[obj[i].userId] = ++ctr;
         }
       }
     }
-    console.log(pdict);
+    console.log(JSON.parse(JSON.stringify(pdict)));
   });
 } catch (error) {
   console.log(error);
