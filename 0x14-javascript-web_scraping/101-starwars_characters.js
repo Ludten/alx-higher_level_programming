@@ -9,7 +9,7 @@ try {
     if (error) throw error;
     const obj = JSON.parse(body);
     const res = obj.characters;
-    for (let i = 0;i < res.length; i++) {
+    for (let i = 0; i < res.length; i++) {
       await arrange(res[i]);
     }
   });
@@ -17,10 +17,10 @@ try {
   console.log(error);
 }
 
-function arrange(url) {
+function arrange (url) {
   try {
     return new Promise(resolve => {
-      setTimeout(function() {
+      setTimeout(function () {
         resolve(
           rp(url, (error, response, body) => {
             if (error) throw error;
@@ -28,7 +28,7 @@ function arrange(url) {
             console.log(char.name);
           })
         );
-      }, 2000);
+      }, 3000);
     });
   } catch (error) {
     console.log(error);
