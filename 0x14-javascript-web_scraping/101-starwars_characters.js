@@ -1,33 +1,36 @@
 #!/usr/bin/node
-const rp = require('request-promise');
+const rp = require('request');
 
 const args = process.argv;
 const a = args[2];
 
-async function order (res) {
-  for (let i = 0; i < res.length; i++) {
-    const options = {
-      uri: res[i],
-      json: true // Automatically parses the JSON string in the response
-    };
-
-    await rp(options)
-      .then(function (repos) {
-        console.log(repos.name);
-      })
-      .catch(function (err) {
-        console.log(err);
-      });
-  }
-}
-
 try {
-  rp('https://swapi-api.hbtn.io/api/films/' + a, (error, response, body) => {
+  rp('https://swapi-api.hbtn.io/api/films/' + a, async (error, response, body) => {
     if (error) throw error;
     const obj = JSON.parse(body);
     const res = obj.characters;
-    order(res);
+    for (let i = 0;i < res.length; i++) {
+      await arrange(res[i]);
+    }
   });
 } catch (error) {
   console.log(error);
+}
+
+function arrange(url) {
+  try {
+    return new Promise(resolve => {
+      setTimeout(function() {
+        resolve(
+          rp(url, (error, response, body) => {
+            if (error) throw error;
+            const char = JSON.parse(body);
+            console.log(char.name);
+          })
+        );
+      }, 2000);
+    });
+  } catch (error) {
+    console.log(error);
+  }
 }
