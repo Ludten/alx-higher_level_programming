@@ -10,7 +10,7 @@ try {
     if (error) throw error;
     const obj = JSON.parse(body);
     console.log(obj.title);
-});
+  });
 } catch (error) {
   console.log(error);
 }

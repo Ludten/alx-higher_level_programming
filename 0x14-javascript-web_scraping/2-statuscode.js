@@ -11,8 +11,8 @@ try {
       if (error) throw error;
     })
     .on('response', (response) => {
-    console.log('code:', response.statusCode);
-  });
+      console.log('code:', response.statusCode);
+    });
 } catch (error) {
   console.log(error);
 }
